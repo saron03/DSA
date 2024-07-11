@@ -1,27 +1,24 @@
 class Solution:
     def findDifference(self, nums1: List[int], nums2: List[int]) -> List[List[int]]:
-        hashtable = {}
-        first_true_second_false = []
-        second_true_first_false = []
+        count1 = {}
+        count2 = {}
         for num in nums1:
-            if num not in hashtable:
-                hashtable[num] = [True,False]
+            count1[num] = count1.get(num, 0) + 1
         for num in nums2:
-            if num in hashtable:
-                hashtable[num][1] = True
-            else:
-                hashtable[num] = [False,True]
-        for key, value in hashtable.items():
-            if value[0] and not value[1]:
-                first_true_second_false.append(key)
-            elif not value[0] and value[1]:
-                second_true_first_false.append(key)
-        return [first_true_second_false,second_true_first_false]
+            count2[num] = count2.get(num, 0) + 1
+        diff1 = []
+        for num in nums1:
+            if num in count1 and num not in count2:
+                diff1.append(num)
+                del count1[num] 
+        diff2 = []
+        for num in nums2:
+            if num in count2 and num not in count1:
+                diff2.append(num)
+                del count2[num] 
+    
+        return [diff1, diff2]
         
-        
-        """
-        :type nums1: List[int]
-        :type nums2: List[int]
-        :rtype: List[List[int]]
-        """
+
+
         
