@@ -9,6 +9,7 @@ class Solution:
             sub.append(i)
             while sum >= target:
                 minLen = min(minLen, len(sub))
+                if minLen == 1: return 1
                 sum -= nums[indexLeft]
                 sub.pop(0)
                 indexLeft +=1
