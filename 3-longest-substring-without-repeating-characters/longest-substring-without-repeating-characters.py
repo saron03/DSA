@@ -1,22 +1,15 @@
-class Solution(object):
-    def lengthOfLongestSubstring(self, s):
-        n = len(s)
-        res=""
-        count = 0
-        if len(s) == 1:
-            return 1
-        if len(s) == 0:
-            return 0
-        for i in range(n):
-            if s[i] not in res:
-                res += s[i]
-            else:
-                count = max(len(res),count)
-                while s[i] in res:
-                    res = res[1:]
-                res +=s[i]
-        count = max(len(res), count)
-        return count
-                
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        subLength = float('-inf')
+        indexLeft = 0
+        sub = ""
+        for i in range(len(s)):
+            while(s[i] in sub):
+                subLength = max(subLength, len(sub))
+                sub =sub[1:]
+                indexLeft +=1 
+            sub += s[i]
 
-            
+        subLength = max(subLength, len(sub))
+        return subLength if subLength != float('inf') else 0
+
