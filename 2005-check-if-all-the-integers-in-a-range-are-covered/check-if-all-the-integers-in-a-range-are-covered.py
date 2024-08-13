@@ -9,7 +9,7 @@ class Solution:
                 else:
                     res = False
             if not res:
-                return False  # Return False if any number in the range is not covered
-        return True  # All 
+                return False
+        return True
         
         
