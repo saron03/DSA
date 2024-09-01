@@ -1,23 +1,17 @@
 class Solution:
     def maxOperations(self, nums: List[int], k: int) -> int:
-        dic1={}
-        count = 0
-        for i in nums:
-            dic1[i] = dic1.get(i, 0) + 1
-        for i in nums:
-            num = k - i
-            if num in dic1 and dic1[num] >=1 and dic1[i] >=1:
-                if i == num:
-                    if dic1[i] >= 2:
-                        dic1[i] -= 2 
-                        count += 1
-                else:
-                    dic1[num] -= 1
-                    dic1[i] -=1
-                    count +=1
+        nums.sort()
+        left, right = 0, len(nums) - 1
+        count = 0   
+        while left < right:
+            current_sum = nums[left] + nums[right]
+            if current_sum == k:
+                count += 1
+                left += 1
+                right -= 1
+            elif current_sum < k:
+                left += 1
+            else:
+                right -= 1
+
         return count
-            
-
-
-                
-
