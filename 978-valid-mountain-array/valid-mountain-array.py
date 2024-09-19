@@ -1,20 +1,14 @@
 class Solution:
     def validMountainArray(self, arr: List[int]) -> bool:
-        max_num = -100
-        max_index = -1
-        if len(arr) < 3:
+        n = len(arr)
+        if n < 3:
             return False
-        for i in range(len(arr)):
-            if arr[i] >= max_num:
-                max_num = arr[i]
-                max_index = i
-        if max_index == len(arr) -1 or max_index == 0:
+        i = 0
+        while i + 1 < n and arr[i] < arr[i + 1]:
+            i += 1
+        if i == 0 or i == n - 1:
             return False
-        for i in range(1,max_index + 1):
-            if arr[i] <= arr[i-1]:
-                return False
-        for i in range(max_index, len(arr)-1):
-            if arr[i] <= arr[i+1]:
-                return False
-        return True
+        while i + 1 < n and arr[i] > arr[i + 1]:
+            i += 1
+        return i == n - 1
 
