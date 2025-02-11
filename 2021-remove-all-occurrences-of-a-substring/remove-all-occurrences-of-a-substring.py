@@ -5,8 +5,5 @@ class Solution(object):
             stack.append(i)
             if len(stack) >= len(part):
                 if ''.join(stack[-len(part):]) == part:
-                    j = 0
-                    while j < len(part):
-                        stack.pop()
-                        j+=1
+                    del stack[-(len(part)):]
         return ''.join(stack)
