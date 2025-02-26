@@ -1,3 +1,8 @@
 class Solution:
     def prefixCount(self, words: List[str], pref: str) -> int:
-        return sum(1 for word in words if word.startswith(pref))
+        c = 0
+        n = len(pref)
+        for word in words:
+            if len(word) >= n and word[:n] == pref:
+                c += 1
+        return c
