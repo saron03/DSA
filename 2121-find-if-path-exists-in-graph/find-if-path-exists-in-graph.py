@@ -1,26 +1,24 @@
-class Solution(object):
-    from collections import defaultdict
-    def validPath(self, n, edges, source, destination):
-        """
-        :type n: int
-        :type edges: List[List[int]]
-        :type source: int
-        :type destination: int
-        :rtype: bool
-        """
-        dic1= defaultdict(list)
-        for i in edges:
-            dic1[i[0]].append(i[1])
-            dic1[i[1]].append(i[0])
+class Solution:
+    def validPath(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
+        
+        found = False 
+        graph = defaultdict(list)
+        for i,j in edges:
+            graph[i].append(j)
+            graph[j].append(i)
+
         visited = set()
-        def dfs(node):
-            if node == destination:
-                return True
+
+        def dfs(node,visited):
+            nonlocal found
             visited.add(node)
-            for i in dic1[node]:
-                if i not in visited:
-                    found = dfs(i)
-                    if found:
-                        return True
-            return False
-        return dfs(source)
+            if node ==destination:
+                found = True
+                return 
+            for n in graph[node]:
+                if n not in visited:
+                    dfs(n, visited)
+
+        dfs(source, visited)
+        return found
+            
