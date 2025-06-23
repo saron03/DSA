@@ -18,7 +18,6 @@ class Solution:
                 return root.right
             elif not root.right:
                 return root.left
-
             min_larger_node = root.right
             while min_larger_node.left:
                 min_larger_node = min_larger_node.left
