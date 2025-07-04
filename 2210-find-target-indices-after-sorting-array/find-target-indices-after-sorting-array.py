@@ -1,9 +1,17 @@
 class Solution:
     def targetIndices(self, nums: List[int], target: int) -> List[int]:
-        arr = []
-        nums.sort()
-        for i in range(0,len(nums)):
-            if nums[i] == target:
-                arr.append(i)
-        arr.sort()    
+
+        small=0
+        count=0
+        arr=[]
+        for i in range(len(nums)):
+            if nums[i] < target:
+                small +=1
+            elif nums[i] == target:
+                count +=1
+        
+        while count !=0:
+            arr.append(small)
+            small +=1
+            count -=1
         return arr
