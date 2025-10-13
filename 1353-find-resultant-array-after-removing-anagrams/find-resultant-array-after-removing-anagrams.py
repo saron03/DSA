@@ -3,9 +3,7 @@ class Solution:
         letter_counts = {}
         for word in words:
             letter_counts[word] = Counter(word)
-        
         res = []
-
         i,j = 0,1
         while j < len(words):
             if letter_counts[words[j]] == letter_counts[words[i]]:
