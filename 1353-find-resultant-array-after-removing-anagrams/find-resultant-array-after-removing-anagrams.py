@@ -13,7 +13,6 @@ class Solution:
                 i = j
                 j +=1
         res.append(words[i])
-
         return res
 
 
