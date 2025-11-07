@@ -1,33 +1,28 @@
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
-        rows = len(grid)
-        cols = len(grid[0])
-        status = []
-        for i in range(rows):
-            row = []
-            for j in range(cols):
-                row.append("unvisited")
-            status.append(row)
-        count = 0
+        if not grid:
+            return 0
+        
+        visited = [[False for _ in range(len(grid[0]))] for _ in range(len(grid))]
 
-        def inbound(row,col):
-            return((0<=row<len(grid)) and (0<=col<len(grid[0])))
+        def inbound(r, c):
+            rows, cols = len(grid), len(grid[0])
+            return 0 <= r < rows and 0 <= c < cols
 
-        def dfs(row,col):
-            status[row][col] = "visited"
+        def dfs(r, c):
+            visited[r][c] = True
+            directions = [(0,1), (1,0), (-1,0), (0,-1)]
 
-            directions = [[0,1],[1,0],[-1,0],[0,-1]]
-            for i , j in directions:
-                new_row = row + i
-                new_col = col + j
-                if inbound(new_row,new_col) and grid[new_row][new_col] == "1" and status[new_row][new_col] == "unvisited" :
-                    dfs(new_row,new_col)
+            for dr, dc in directions:
+                new_r, new_c = r + dr, c + dc
+                if inbound(new_r, new_c) and not visited[new_r][new_c] and grid[new_r][new_c] == "1":
+                    dfs(new_r, new_c)
+
+        island_count = 0
         for i in range(len(grid)):
             for j in range(len(grid[0])):
-                if status[i][j] == "unvisited" and grid[i][j] == "1":
-                    dfs(i,j)
-                    count +=1
-        return count
+                if grid[i][j] == "1" and not visited[i][j]:
+                    dfs(i, j)
+                    island_count += 1
 
-
-
+        return island_count
